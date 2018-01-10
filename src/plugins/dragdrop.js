@@ -75,6 +75,8 @@
 		var	opts;
 		var editor;
 		var handleFile;
+		var handleDropEvent;
+		var dropEffect;
 		var container;
 		var cover;
 		var placeholderId = 0;
@@ -150,6 +152,8 @@
 				}
 			}
 
+			dt.dropEffect = dropEffect;
+
 			showCover();
 			e.preventDefault();
 		}
@@ -166,10 +170,12 @@
 					return;
 				}
 
-				if (isAllowed(files[i])) {
+				if (handleFile && isAllowed(files[i])) {
 					handleFile(files[i], createHolder());
 				}
 			}
+
+			handleDropEvent(e);
 
 			e.preventDefault();
 		}
@@ -178,6 +184,8 @@
 			editor = this;
 			opts = editor.opts.dragdrop || {};
 			handleFile = opts.handleFile;
+			handleDropEvent = opts.handleDropEvent;
+			dropEffect = opts.dropEffect;
 
 			container = editor.getContentAreaContainer().parentNode;
 
@@ -208,7 +216,9 @@
 					if (base64DataUri.test(image.src)) {
 						var file = base64DataUriToBlob(image.src);
 						if (file && isAllowed(file)) {
-							handleFile(file, createHolder(image));
+							if (handleFile) {
+								handleFile(file, createHolder(image));
+							}
 						} else {
 							image.parentNode.removeChild(image);
 						}

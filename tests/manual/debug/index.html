@@ -40,6 +40,17 @@
 
 				<textarea>{
 	rtl: null,
+	plugins: 'dragdrop',
+	dragdrop: {
+		handleDropEvent: function (e) {
+			console.log(e);
+			var dt = e.dataTransfer;
+			console.log(dt);
+			var fs = dt.files;
+			console.log(fs);
+		},
+		dropEffect: 'copy'
+	},
 	format: 'bbcode',
 	autofocus: true,
 	icons: 'material',
