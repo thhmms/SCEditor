@@ -175,7 +175,9 @@
 				}
 			}
 
-			handleDropEvent(e);
+			if (handleDropEvent) {
+				handleDropEvent(e);
+			}
 
 			e.preventDefault();
 		}
