@@ -31,7 +31,7 @@
     "no-unused-vars": "error",
     "strict": "error",
     "max-params": ["error", 4],
-    "max-depth": ["error", 4],
+    "max-depth": ["error", 5],
     "max-len": ["error", {
       "code": 80,
       "ignoreUrls": true,
